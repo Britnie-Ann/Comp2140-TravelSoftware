@@ -2,45 +2,30 @@ import java.util.Date;
 import java.util.List;
 
 public class Trip {
-
-    private int userId;
     private String destination;
-    private Date travelDate;
     private String accommodation;
-    private ArrayList<String> activities; 
+    private Date startDate;
+    private Date endDate;
+    private String airline;
+    private List<String> activities;
 
     // Constructor
-    public Trip(int userId, String destination, Date travelDate, String accommodation, List<String> activities) {
-        this.userId = userId;
+    public Trip(String destination, String accommodation, Date startDate, Date endDate, String airline, List<String> activities) {
         this.destination = destination;
-        this.travelDate = travelDate;
         this.accommodation = accommodation;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.airline = airline;
         this.activities = activities;
     }
 
-    // Getter and setter methods
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
+    // Getters and Setters
     public String getDestination() {
         return destination;
     }
 
     public void setDestination(String destination) {
         this.destination = destination;
-    }
-
-    public Date getTravelDate() {
-        return travelDate;
-    }
-
-    public void setTravelDate(Date travelDate) {
-        this.travelDate = travelDate;
     }
 
     public String getAccommodation() {
@@ -51,23 +36,35 @@ public class Trip {
         this.accommodation = accommodation;
     }
 
-    public ArrayList<String> getActivities() { 
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getAirline() {
+        return airline;
+    }
+
+    public void setAirline(String airline) {
+        this.airline = airline;
+    }
+
+    public List<String> getActivities() {
         return activities;
     }
 
-    public void setActivities(ArrayList<String> activities) { 
+    public void setActivities(List<String> activities) {
         this.activities = activities;
-    }
-
-    // You may also want to override toString() for easier display
-    @Override
-    public String toString() {
-        return "Trip{" +
-                "userId=" + userId +
-                ", destination='" + destination + '\'' +
-                ", travelDate=" + travelDate +
-                ", accommodation='" + accommodation + '\'' +
-                ", activities=" + activities +
-                '}';
     }
 }
