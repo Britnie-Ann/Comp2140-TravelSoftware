@@ -301,6 +301,17 @@ public class ReviewManager
         // Add the list of locations to a JScrollPane to make it scrollable
         var scrollableList = new JScrollPane(locationPanel);
         scrollableList.setPreferredSize(new Dimension(350, 200)); // Set preferred size for scrollable list
+
+        // Check if the panel has any reviews (check if it has components)
+        if (locations.size() < 1)
+        {
+            // If there are no components, set the scroll pane to show a "No Reviews" message
+            JLabel noReviewsLabel = new JLabel("No reviews match the criteria.");
+            noReviewsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+            locationPanel.add(noReviewsLabel);
+            locationPanel.revalidate();  // Revalidate the panel layout to update
+            locationPanel.repaint();  // Repaint to reflect the changes
+        }
         
         return scrollableList;
     }
