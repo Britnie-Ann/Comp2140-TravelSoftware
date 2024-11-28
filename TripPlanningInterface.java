@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class TripPlanningInterface {
@@ -57,7 +58,7 @@ public class TripPlanningInterface {
     }
 
     // edits the itinerary 
-    public void editItinerary(String newDestination, String newAccommodation, List<String> newActivities) {
+    public void editItinerary(String newDestination, String newAccommodation, ArrayList<String> newActivities) {
         this.destination = newDestination;
         this.accommodation = newAccommodation;
         this.activities = newActivities;

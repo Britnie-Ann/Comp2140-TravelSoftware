@@ -3,13 +3,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UserAccountManager {
-
     private static List<UserAccount> userAccounts = new ArrayList<>();
+    private static List<EmployeeAccount> employeelist = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
 
     // Method to prompt the user for account creation or login
     public static void start() {
-        System.out.println("Welcome to the Travel Account System!");
         System.out.println("1. Create a New Account");
         System.out.println("2. Log In to Existing Account");
         System.out.print("Please choose an option (1 or 2): ");
@@ -24,10 +23,14 @@ public class UserAccountManager {
             System.out.println("Invalid choice. Please try again.");
             start();
         }
+
+        Employeedata data = new Employeedata();
+        employeelist = data.getemployeeList();
     }
 
     // Method to create a new user account
     public static void createUserAccount() {
+        System.out.println("\n--------------------------------------------------------------------------------");
         System.out.println("\nPlease enter the following information to create your account:");
 
         System.out.print("First Name: ");
@@ -48,20 +51,11 @@ public class UserAccountManager {
             telephoneNumber = scanner.nextLine();
         } while (!Validator.isValidPhoneNumber(telephoneNumber));
 
-        System.out.print("Secondary Telephone Number: ");
-        String secondaryTelephoneNumber = scanner.nextLine();
-
         String emailAddress;
         do {
             System.out.print("Email Address: ");
             emailAddress = scanner.nextLine();
         } while (!Validator.isValidEmail(emailAddress));
-
-        System.out.print("Username: ");
-        String username = scanner.nextLine();
-
-        System.out.print("Password: ");
-        String password = scanner.nextLine();
 
         // Select continent and country
         System.out.println("Please select your continent preference:");
@@ -73,25 +67,23 @@ public class UserAccountManager {
         System.out.println("You selected " + continentPreference + ". Here are the country options:");
         String countryPreference = getCountryPreference(continentChoice);
 
-        System.out.print("Would you like a full package or partial package deal? ");
-        String packageType = scanner.nextLine();
+        System.out.print("Username: ");
+        String username = scanner.nextLine();
 
-        System.out.println("Accommodation preference:");
-        System.out.println("1. Hotel Stay\n2. Airbnb");
-        int accommodationChoice = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
-        String accommodationPreference = (accommodationChoice == 1) ? "Hotel Stay" : "Airbnb";
+        System.out.print("Password: ");
+        String password = scanner.nextLine();
 
         UserAccount newUser = new UserAccount(firstName, lastName, dateOfBirth, telephoneNumber,
-                secondaryTelephoneNumber, emailAddress, username, password, continentPreference,
-                countryPreference, packageType, accommodationPreference);
+                emailAddress, username, password, continentPreference,
+                countryPreference);
 
         userAccounts.add(newUser);
         System.out.println("Account created successfully!\n");
         displayUserInfo(newUser);
 
-        // Ask if the user wants to update or delete the account
-        askForUpdateOrDelete(newUser);
+        // Ask how the user wants to create a trip itinerary
+        System.out.println("Now please log in to your account");
+        loginUserAccount();
     }
 
     // Method for logging into an existing account
@@ -105,12 +97,32 @@ public class UserAccountManager {
         String password = scanner.nextLine();
 
         boolean found = false;
+        for (EmployeeAccount em: employeelist){
+            if(em.getUsername().equals(username) && em.getPassword().equals(password)){
+                System.out.println("Welcome employee " + em.getFirstName() + " " + em.getLastName());
+                EmployeeInterface.start();
+            }
+        }
+
         for (UserAccount account : userAccounts) {
             if (account.getUsername().equals(username) && account.getPassword().equals(password)) {
                 found = true;
                 System.out.println("\nLogin successful! Welcome back, " + account.getFirstName() + " " + account.getLastName());
-                displayUserInfo(account);
-                askForUpdateOrDelete(account); // Prompt to update or delete after successful login
+                System.out.println("What would you like to do?");
+                System.out.println("1. Create a travel itinerary");
+                System.out.println("2. Change Account Information");
+                System.out.println("3. Exit Program");
+                int option = scanner.nextInt();
+
+                if (option == 1){
+                    ItineraryManagement.start();
+                }
+                else if (option == 2){
+                    askForUpdateOrDelete(account); // Prompt to update or delete after successful login
+                }
+                else if (option == 3){
+                    //How to end Program 
+                }
                 break;
             }
         }
@@ -191,14 +203,6 @@ public class UserAccountManager {
                 System.out.print("Enter new Country Preference: ");
                 user.setCountryPreference(scanner.nextLine());
                 break;
-            case 10:
-                System.out.print("Enter new Package Type: ");
-                user.setPackageType(scanner.nextLine());
-                break;
-            case 11:
-                System.out.print("Enter new Accommodation Preference: ");
-                user.setAccommodationPreference(scanner.nextLine());
-                break;
             default:
                 System.out.println("Invalid choice.");
                 break;
@@ -215,16 +219,14 @@ public class UserAccountManager {
 
     // Method to display user information
     private static void displayUserInfo(UserAccount user) {
-        System.out.println("\nAccount Information:");
+        System.out.println("\nAccount Information for " + user.getUsername());
+        //System.out.println("Username: " + user.getUsername());
         System.out.println("Name: " + user.getFirstName() + " " + user.getLastName());
         System.out.println("Date of Birth: " + user.getDateOfBirth());
         System.out.println("Telephone: " + user.getTelephoneNumber());
         System.out.println("Email: " + user.getEmailAddress());
-        System.out.println("Username: " + user.getUsername());
         System.out.println("Continent Preference: " + user.getContinentPreference());
         System.out.println("Country Preference: " + user.getCountryPreference());
-        System.out.println("Package Type: " + user.getPackageType());
-        System.out.println("Accommodation Preference: " + user.getAccommodationPreference());
     }
 
     // Helper methods for continent and country selection

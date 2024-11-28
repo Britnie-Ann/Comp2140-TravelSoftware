@@ -4,31 +4,26 @@ public class UserAccount {
     private String lastName;
     private String dateOfBirth;
     private String telephoneNumber;
-    private String secondaryTelephoneNumber;
     private String emailAddress;
-    private String username;
-    private String password;
     private String continentPreference;
     private String countryPreference;
-    private String packageType;
-    private String accommodationPreference;
+    private String username;
+    private String password;
+    
 
     // Constructor
     public UserAccount(String firstName, String lastName, String dateOfBirth, String telephoneNumber,
-                       String secondaryTelephoneNumber, String emailAddress, String username, String password,
-                       String continentPreference, String countryPreference, String packageType, String accommodationPreference) {
+                    String emailAddress, String username, String password,
+                       String continentPreference, String countryPreference) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.telephoneNumber = telephoneNumber;
-        this.secondaryTelephoneNumber = secondaryTelephoneNumber;
         this.emailAddress = emailAddress;
         this.username = username;
         this.password = password;
         this.continentPreference = continentPreference;
         this.countryPreference = countryPreference;
-        this.packageType = packageType;
-        this.accommodationPreference = accommodationPreference;
     }
 
     // Getter methods
@@ -46,10 +41,6 @@ public class UserAccount {
 
     public String getTelephoneNumber() {
         return telephoneNumber;
-    }
-
-    public String getSecondaryTelephoneNumber() {
-        return secondaryTelephoneNumber;
     }
 
     public String getEmailAddress() {
@@ -72,14 +63,6 @@ public class UserAccount {
         return countryPreference;
     }
 
-    public String getPackageType() {
-        return packageType;
-    }
-
-    public String getAccommodationPreference() {
-        return accommodationPreference;
-    }
-
     // Setter methods
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -95,10 +78,6 @@ public class UserAccount {
 
     public void setTelephoneNumber(String telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
-    }
-
-    public void setSecondaryTelephoneNumber(String secondaryTelephoneNumber) {
-        this.secondaryTelephoneNumber = secondaryTelephoneNumber;
     }
 
     public void setEmailAddress(String emailAddress) {
@@ -119,13 +98,5 @@ public class UserAccount {
 
     public void setCountryPreference(String countryPreference) {
         this.countryPreference = countryPreference;
-    }
-
-    public void setPackageType(String packageType) {
-        this.packageType = packageType;
-    }
-
-    public void setAccommodationPreference(String accommodationPreference) {
-        this.accommodationPreference = accommodationPreference;
     }
 }
