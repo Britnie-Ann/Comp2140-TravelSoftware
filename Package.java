@@ -42,11 +42,11 @@ public class Package{
     }
 
     public String displaypackage(){
-        return "\n Country: " + country +
+        return "Country: " + country +
                 "\n Hotel: " + Hname +
                 "\n Date of Arrival: " + DOA +
                 "\n Date of Departure: " + DOD +
-                "n Airline: " + Airline +
+                "\n Airline: " + Airline +
                 "\n Price: " + price;
     }
 }
