@@ -95,12 +95,26 @@ public class ReviewManagerGUI
         usernameField.setBorder(BorderFactory.createTitledBorder("Username"));
         panel.add(usernameField);
 
-        // Location Field
+        /* Location Field
         JTextField locationField = new JTextField();
         locationField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
         locationField.setAlignmentX(Component.CENTER_ALIGNMENT);
         locationField.setBorder(BorderFactory.createTitledBorder("Location"));
         panel.add(locationField);
+        */
+
+        // Get Packages and Display in JComboBox
+        var packages = new PackageData();
+
+        // Create a combo box for selecting a package (Hotel + Airline)
+        JComboBox<String> packageComboBox = new JComboBox<>();
+        for (Package p : packages.getpackageList()) {
+            String displayText = p.getHotel() + " + " + p.getAirline();
+            packageComboBox.addItem(displayText);
+        }
+        packageComboBox.setAlignmentX(Component.CENTER_ALIGNMENT);
+        packageComboBox.setBorder(BorderFactory.createTitledBorder("Select Package"));
+        panel.add(packageComboBox);
 
         // Rating Field
         JTextField ratingField = new JTextField();
@@ -125,7 +139,7 @@ public class ReviewManagerGUI
             @Override
             public void actionPerformed(ActionEvent e) {
                 String username = usernameField.getText();
-                String location = locationField.getText(); // Get the location
+                String selectedPackage = (String) packageComboBox.getSelectedItem(); // Get the package
                 String ratingText = ratingField.getText(); // Get the rating as text
                 String review = reviewTextArea.getText().trim();
 
@@ -139,7 +153,7 @@ public class ReviewManagerGUI
                     {
                         JOptionPane.showMessageDialog(addReviewFrame, "Please enter a rating between 1 and 5.");
                     }
-                    else if (username.isEmpty() || location.isEmpty() || review.isEmpty()) {
+                    else if (username.isEmpty() || selectedPackage.isEmpty() || review.isEmpty()) {
                         // Validate that all fields are filled
                         JOptionPane.showMessageDialog(addReviewFrame, "Please fill in all fields.");
                     }
@@ -149,8 +163,10 @@ public class ReviewManagerGUI
                     }
                     else
                     {
+                        //String location = selectedPackage.split(" \\+ ")[0]; // Get only the hotel part as location
+
                         // Submit the review if all inputs are valid
-                        if(ReviewManager.submitReview(username, location, review, rating))
+                        if(ReviewManager.submitReview(username, selectedPackage, review, rating))
                         {
                             JOptionPane.showMessageDialog(addReviewFrame, "Review submitted successfully!");
                         }
@@ -161,7 +177,7 @@ public class ReviewManagerGUI
 
                         // Clear fields after submission
                         usernameField.setText("");
-                        locationField.setText("");
+                        //locationField.setText("");
                         ratingField.setText("");
                         reviewTextArea.setText("");
                     }
