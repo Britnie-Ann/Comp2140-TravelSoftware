@@ -72,7 +72,7 @@ public class TripPlanningInterfaceGUI extends JFrame {
 
             try {
                 // Parse the start and end date strings into Date objects
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
                 java.util.Date startDate = dateFormat.parse(startDateStr);
                 java.util.Date endDate = dateFormat.parse(endDateStr);
 
