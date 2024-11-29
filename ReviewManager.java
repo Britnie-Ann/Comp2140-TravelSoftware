@@ -46,7 +46,7 @@ public class ReviewManager
 
         for (var rating : Reviews)
         {
-            if (rating.getLocation().equals(location))
+            if (rating.getLocation().toLowerCase().equals(location.toLowerCase()))
             {
                 sum += rating.getRating();
                 ratings++;
